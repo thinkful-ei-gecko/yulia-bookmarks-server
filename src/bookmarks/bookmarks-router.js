@@ -4,10 +4,10 @@ const uuid = require('uuid/v4');
 const logger = require('../logger');
 const { bookmarks } = require('../store');
 
-const cardRouter = express.Router();
+const bookmarksRouter = express.Router();
 const bodyParser = express.json();
 
-cardRouter
+bookmarksRouter
   .route('/')
   .get((req, res) => {
     res.json(bookmarks);
@@ -41,7 +41,7 @@ cardRouter
 
     bookmarks.push(bookmark);
 
-    logger.info(`Bookmark with id ${id} crreated`);
+    logger.info(`Bookmark with id ${id} created`);
 
     res
       .status(201)
@@ -49,7 +49,7 @@ cardRouter
       .json(bookmark);
   });
 
-cardRouter
+bookmarksRouter
   .route('/:id')
   .get((req, res) => {
     const { id } = req.params;
@@ -84,4 +84,4 @@ cardRouter
   });
 
 
-module.exports = cardRouter;
+module.exports = bookmarksRouter;

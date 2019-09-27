@@ -6,7 +6,7 @@ const cors = require('cors');
 const helmet = require('helmet');
 const { NODE_ENV } = require('./config');
 const logger = require('./logger');
-const cardRouter = require('./bookmark/bookmark-router');
+const bookmarksRouter = require('./bookmarks/bookmarks-router');
 
 const app = express();
 
@@ -16,8 +16,6 @@ const morganOption = (NODE_ENV === 'production')
 app.use(morgan(morganOption));
 app.use(helmet());
 app.use(cors());
-
-app.use('/bookmarks', cardRouter);
 
 app.use(function validateBearerToken(req, res, next) {
   const apiToken = process.env.API_TOKEN;
@@ -30,10 +28,9 @@ app.use(function validateBearerToken(req, res, next) {
   next();
 });
 
-app.use(cardRouter);
+app.use('/bookmarks', bookmarksRouter);
 
-
-app.use(function errorHandler(error, req, res, next) {
+app.use(function errorHandler(error, req, res, next) {//eslint-disable-line no-unused-vars
   let response;
   if (NODE_ENV === 'production') {
     response = { error: { message: 'server error' }};
