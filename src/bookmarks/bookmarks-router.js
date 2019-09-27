@@ -3,6 +3,7 @@ const express = require('express');
 const uuid = require('uuid/v4');
 const logger = require('../logger');
 const { bookmarks } = require('../store');
+const { PORT } = require('../config');
 
 const bookmarksRouter = express.Router();
 const bodyParser = express.json();
@@ -45,7 +46,7 @@ bookmarksRouter
 
     res
       .status(201)
-      .location(`http://localhost: 8000/bookmark/${id}`)
+      .location(`http://localhost:${PORT}/bookmark/${id}`)
       .json(bookmark);
   });
 
