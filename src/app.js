@@ -28,11 +28,7 @@ app.use(function validateBearerToken(req, res, next) {
   next();
 });
 
-app.use('/bookmarks', bookmarksRouter);
-
-app.get('/', (req, res) => {
-  res.send('Hello, world!');
-});
+app.use('/api/bookmarks', bookmarksRouter);
 
 app.use(function errorHandler(error, req, res, next) {//eslint-disable-line no-unused-vars
   let response;
